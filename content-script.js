@@ -1,16 +1,15 @@
-{
-  "manifest_version": 2,
-  "name": "Twitch Channel Points Auto-Claimer",
-  "version": "1.0",
-  "description": "Automatically claims channel points on Twitch.tv",
-  "permissions": ["activeTab", "https://twitch.tv/*"],
-  "content_scripts": [
-    {
-      "matches": ["https://www.twitch.tv/*"],
-      "js": ["content-script.js"]
-    }
-  ],
-  "icons": {
-    "48": "icon.png"
+function findAndClickClaimButton() {
+  const claimButtonSelector = '[aria-label="Bonus einfordern"]';
+  const claimButton = document.querySelector(claimButtonSelector);
+
+  if (claimButton) {
+    claimButton.click();
   }
 }
+
+function startAutoClaimer(interval) {
+  setInterval(findAndClickClaimButton, interval);
+}
+
+// Startet den Auto-Claimer, der alle 5 Sekunden (5000 Millisekunden) nach dem Button sucht und ihn drückt.
+startAutoClaimer(5000);
